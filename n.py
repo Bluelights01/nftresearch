@@ -4,6 +4,9 @@
 
 import heapq
 import math
+import time
+
+import line
 Adj=[
     [1,1,0,0],
     [0,1,0,1],
@@ -26,6 +29,34 @@ Reflect=[
 
 def hn(x,y,X,Y):
      return math.sqrt((X - x)**2 + (Y - y)**2)
+
+
+def bresenham_line(x0, y0, x1, y1,mygrid):
+    dx = abs(x1 - x0)
+    dy = abs(y1 - y0)
+    x, y = x0, y0
+    sx = -1 if x0 > x1 else 1
+    sy = -1 if y0 > y1 else 1
+    if dx > dy:
+        err = dx / 2.0
+        while x != x1:
+            mygrid[x][y]=2
+            err -= dy
+            if err < 0:
+                y += sy
+                err += dx
+            x += sx
+    else:
+        err = dy / 2.0
+        while y != y1:
+            mygrid[x][y]=2
+            err -= dx
+            if err < 0:
+                x += sx
+                err += dy
+            y += sy
+    mygrid[x1][y1]=2
+
 
 
 class QuadNode:
@@ -139,7 +170,6 @@ def SolveWithNFT(Start, End, grid):
     visited = set()
     heap = []
     
-    # Wrap the path in our custom class
     heapq.heappush(heap, PriorityItem(0, [start_node]))
 
     visited.add(start_node)
@@ -184,5 +214,31 @@ def SolveWithNFT(Start, End, grid):
     if(len(finalpath)!=0):
         finalpath.append(start_node)   
 
-    finalpath.reverse()        
-    return finalpath
+    finalpath.reverse()
+
+
+
+
+    newpath=[Start]
+
+    for temp in finalpath:
+        co=temp.coords
+        x=co[0]
+        n=co[1]
+        y=co[2]
+        m=co[3]
+        ptx=(n+x)//2
+        pty=(m+y)//2
+        newpath.append([ptx,pty])
+    
+    newpath.append(End)     
+    newpath=line.line_join(newpath,Start,End,grid)
+    print(newpath)
+    
+
+    for temp in newpath:
+        bresenham_line(Start[0],Start[1],temp[0],temp[1],grid)
+        Start=[temp[0],temp[1]]  
+
+    bresenham_line(Start[0],Start[1],End[0],End[1],grid)
+    return grid

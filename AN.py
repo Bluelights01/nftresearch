@@ -1,6 +1,7 @@
 
 import queue
 import math
+import time
 
 def hn(x,y,X,Y):
      return math.sqrt((X - x)**2 + (Y - y)**2)
@@ -64,7 +65,7 @@ def findpath(matrix,start,goal):
          goal=parent[goal[0]][goal[1]]
          if(goal[0]==-1):
               break
-         
+    
     return ans
 
 
