@@ -32,26 +32,62 @@ def findpath(matrix,start,goal):
           y=a[2]
           dist=a[3]
           
-          if(x+1<n and (path[x+1][y]>dist+1) and matrix[x+1][y]!=0):
-               parent[x+1][y]=[x,y]
-               path[x+1][y]=dist+1
-               h=hn(x+1,y,goal[0],goal[1])
-               q.put([h+dist+1,x+1,y,dist+1])
-          if(y+1<m and (path[x][y+1]>dist+1) and matrix[x][y+1]!=0):
-               parent[x][y+1]=[x,y]
-               path[x][y+1]=dist+1
-               h=hn(x,y+1,goal[0],goal[1])
-               q.put([h+dist+1,x,y+1,dist+1])
-          if(x-1>=0 and (path[x-1][y]>dist+1) and matrix[x-1][y]!=0):
-               parent[x-1][y]=[x,y]
-               path[x-1][y]=dist+1
-               h=hn(x-1,y,goal[0],goal[1])
-               q.put([h+dist+1,x-1,y,dist+1])
-          if(y-1>=0 and (path[x][y-1]>dist+1) and matrix[x][y-1]!=0):
-               parent[x][y-1]=[x,y]
-               path[x][y-1]=dist+1
-               h=hn(x,y-1,goal[0],goal[1])
-               q.put([h+dist+1,x,y-1,dist+1])
+          
+          if(y+1 < m and (path[x][y+1] > dist+1) and matrix[x][y+1] != 0):
+                parent[x][y+1] = [x, y]
+                path[x][y+1] = dist+1
+                h = hn(x, y+1, goal[0], goal[1])
+                q.put([h+dist+1, x, y+1, dist+1])
+
+
+          if(x+1 < n and (path[x+1][y] > dist+1) and matrix[x+1][y] != 0):
+               parent[x+1][y] = [x, y]
+               path[x+1][y] = dist+1
+               h = hn(x+1, y, goal[0], goal[1])
+               q.put([h+dist+1, x+1, y, dist+1])
+
+
+          if(y-1 >= 0 and (path[x][y-1] > dist+1) and matrix[x][y-1] != 0):
+               parent[x][y-1] = [x, y]
+               path[x][y-1] = dist+1
+               h = hn(x, y-1, goal[0], goal[1])
+               q.put([h+dist+1, x, y-1, dist+1])
+
+
+          if(x-1 >= 0 and (path[x-1][y] > dist+1) and matrix[x-1][y] != 0):
+               parent[x-1][y] = [x, y]
+               path[x-1][y] = dist+1
+               h = hn(x-1, y, goal[0], goal[1])
+               q.put([h+dist+1, x-1, y, dist+1])
+
+
+          if(x+1 < n and y+1 < m and (path[x+1][y+1] > dist+math.sqrt(2)) and matrix[x+1][y+1] != 0):
+               parent[x+1][y+1] = [x, y]
+               path[x+1][y+1] = dist+math.sqrt(2)
+               h = hn(x+1, y+1, goal[0], goal[1])
+               q.put([h+dist+math.sqrt(2), x+1, y+1, dist+math.sqrt(2)])
+
+
+          if(x+1 < n and y-1 >= 0 and (path[x+1][y-1] > dist+math.sqrt(2)) and matrix[x+1][y-1] != 0):
+               parent[x+1][y-1] = [x, y]
+               path[x+1][y-1] = dist+math.sqrt(2)
+               h = hn(x+1, y-1, goal[0], goal[1])
+               q.put([h+dist+math.sqrt(2), x+1, y-1, dist+math.sqrt(2)])
+
+
+          if(x-1 >= 0 and y-1 >= 0 and (path[x-1][y-1] > dist+math.sqrt(2)) and matrix[x-1][y-1] != 0):
+               parent[x-1][y-1] = [x, y]
+               path[x-1][y-1] = dist+math.sqrt(2)
+               h = hn(x-1, y-1, goal[0], goal[1])
+               q.put([h+dist+math.sqrt(2), x-1, y-1, dist+math.sqrt(2)])
+
+
+          if(x-1 >= 0 and y+1 < m and (path[x-1][y+1] > dist+math.sqrt(2)) and matrix[x-1][y+1] != 0):
+               parent[x-1][y+1] = [x, y]
+               path[x-1][y+1] = dist+math.sqrt(2)
+               h = hn(x-1, y+1, goal[0], goal[1])
+               q.put([h+dist+math.sqrt(2), x-1, y+1, dist+math.sqrt(2)])
+
           
 
     
@@ -65,7 +101,7 @@ def findpath(matrix,start,goal):
          goal=parent[goal[0]][goal[1]]
          if(goal[0]==-1):
               break
-    
+    print(count)
     return ans
 
 

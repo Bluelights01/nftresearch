@@ -8,7 +8,7 @@ import numpy as np
 
 
 
-mygrid=image.image_to_binary_grid('myimage.png')
+mygrid=image.image_to_binary_grid('gemini.png')
 np.savetxt("binary_grid.txt", mygrid, fmt='%d', delimiter='')
 
 start=[0,0]
